@@ -5,40 +5,63 @@ import React from 'react'
 
 const WelcomeScreen = () => {
 
-    const { width } = useWindowDimensions()
+    const { width, height } = useWindowDimensions()
+
     return (
         <SafeAreaView style={styles.container}>
+
+            {/* Header */}
             <View style={styles.headerContainer}>
                 <Image source={require('../assets/images/logo.png')} style={{
-                    width: width * 0.15,
-                    height: width * 0.15,
+                    width: width * 0.12,
+                    height: width * 0.12,
+                    borderRadius: 10,
                 }} resizeMode="cover" />
                 <Text style={styles.logoText}>BuddyHome</Text>
-
             </View>
+
+            {/* Welcome Text */}
             <View style={styles.contentContainer}>
                 <Text style={styles.welcomeText}>Welcome! 🐾</Text>
-                <Text style={styles.subText}>Where Every Paw Finds a Home</Text>
+                <Text style={styles.subText}>
+                    Where Every Paw Finds a Home <Text style={styles.heartText}>❤️</Text>
+                </Text>
             </View>
-            <View>
-                <View>
-                    <Image source={require('../assets/images/welcomescreen.png')} style={{
-                        width: width * 0.98,
-                        height: width * 1.2,
-                        borderColor: '#ffffff',
 
-                    }} resizeMode="cover" />
+            {/* Image + Card pushed to bottom */}
+            <View style={styles.bottomSection}>
 
+                {/* Pet Image */}
+                <View style={styles.imageWrapper}>
+                    <Image
+                        source={require('../assets/images/welcomescreen.png')}
+                        style={{
+                            width: width,
+                            height: height * 0.52,
+                        }}
+                        resizeMode="cover"
+                    />
                 </View>
+
+                {/* Bottom Card */}
+                <View style={styles.bottomContainer}>
+                    <TouchableOpacity
+                        style={styles.getStartedButton}
+                        activeOpacity={0.85}
+                    >
+                        <Text style={styles.getStartedText}>Get Started</Text>
+                    </TouchableOpacity>
+
+                    <TouchableOpacity
+                        style={styles.alreadyHaveAccountButton}
+                        activeOpacity={0.7}
+                    >
+                        <Text style={styles.alreadyHaveAccountText}>Already have an account?</Text>
+                    </TouchableOpacity>
+                </View>
+
             </View>
-            <View style={styles.bottomContainer}>
-                <TouchableOpacity style={styles.getStartedButton}>
-                    <Text style={styles.getStartedText}>Get Started</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.alreadyHaveAccountButton}>
-                    <Text style={styles.alreadyHaveAccountText}>Already have an account?</Text>
-                </TouchableOpacity>
-            </View>
+
         </SafeAreaView>
     )
 }
@@ -48,69 +71,94 @@ export default WelcomeScreen
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#ffffff'
-
+        backgroundColor: '#ffffff',
     },
     headerContainer: {
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'center',
-        gap: 5,
-        marginVertical: 10
+        gap: 8,
+        paddingHorizontal: 20,
+        paddingTop: 6,
+        paddingBottom: 4,
     },
     logoText: {
-        fontSize: 28,
+        fontSize: 26,
         fontWeight: '800',
-        letterSpacing: 0.5,
+        letterSpacing: 0.4,
+        color: '#111111',
     },
     contentContainer: {
-        flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
-        gap: 5,
-        marginVertical: 20
-    },
-    bottomContainer: {
-        flex: 1,
-        justifyContent: 'flex-end',
-        paddingBottom: 20,
-        marginHorizontal: 20
+        gap: 4,
+        paddingHorizontal: 20,
+        paddingVertical: 10,
     },
     welcomeText: {
         fontSize: 30,
-        fontWeight: '800',
+        fontWeight: '900',
         letterSpacing: 0.5,
+        color: '#111111',
+    },
+    heartText: {
+        fontSize: 16,
     },
     subText: {
-        fontSize: 16,
-        fontWeight: '800',
-        letterSpacing: 0.5,
+        fontSize: 15,
+        fontWeight: '700',
+        letterSpacing: 0.3,
+        color: '#444444',
     },
-    getStartedText: {
-        fontSize: 18,
-        fontWeight: '800',
-        letterSpacing: 0.5,
-        color: '#ffffff',
+    bottomSection: {
+        flex: 1,
+        justifyContent: 'flex-end',
     },
-    alreadyHaveAccountText: {
-        fontSize: 16,
-        fontWeight: '800',
-        letterSpacing: 0.5,
-        color: '#0A804A'
+    imageWrapper: {
+        overflow: 'hidden',
+    },
+    bottomContainer: {
+        backgroundColor: '#ffffff',
+        borderTopLeftRadius: 28,
+        borderTopRightRadius: 28,
+        marginTop: -28,
+        paddingHorizontal: 24,
+        paddingTop: 22,
+        paddingBottom: 16,
+        gap: 10,
+        // Shadow for card elevation
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: -4 },
+        shadowOpacity: 0.08,
+        shadowRadius: 12,
+        elevation: 10,
     },
     getStartedButton: {
         backgroundColor: '#0A804A',
-        padding: 15,
-        borderRadius: 25,
+        paddingVertical: 16,
+        borderRadius: 30,
         alignItems: 'center',
-        marginHorizontal: 20,
+        shadowColor: '#0A804A',
+        shadowOffset: { width: 0, height: 4 },
+        shadowOpacity: 0.35,
+        shadowRadius: 10,
+        elevation: 6,
+    },
+    getStartedText: {
+        fontSize: 17,
+        fontWeight: '800',
+        letterSpacing: 0.6,
+        color: '#ffffff',
     },
     alreadyHaveAccountButton: {
-        backgroundColor: '#ffffff',
-        padding: 15,
-        borderRadius: 25,
+        paddingVertical: 12,
+        borderRadius: 30,
         alignItems: 'center',
-        marginHorizontal: 20,
-
+    },
+    alreadyHaveAccountText: {
+        fontSize: 15,
+        fontWeight: '700',
+        letterSpacing: 0.3,
+        color: '#0A804A',
     },
 })
