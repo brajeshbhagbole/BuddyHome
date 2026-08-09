@@ -1,4 +1,4 @@
-package com.pawfinder
+package com.buddyhome
 
 import android.app.Application
 import com.facebook.react.PackageList
