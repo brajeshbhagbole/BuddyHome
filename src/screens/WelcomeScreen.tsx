@@ -1,9 +1,12 @@
 import { StyleSheet, Text, View, Image, useWindowDimensions, TouchableOpacity } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
+import { useNavigation } from '@react-navigation/native';
+import OnboardingRole from '../screens/OnboardingRole';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import React from 'react'
 
 
-const WelcomeScreen = () => {
+const WelcomeScreen = ({ navigation }: { navigation: any }) => {
 
     const { width, height } = useWindowDimensions()
 
@@ -84,6 +87,7 @@ const WelcomeScreen = () => {
                     <TouchableOpacity
                         style={styles.getStartedButton}
                         activeOpacity={0.85}
+                        onPress={() => navigation.navigate('OnboardingRole')}
                     >
                         <Text style={styles.getStartedText}>Get Started</Text>
                     </TouchableOpacity>
