@@ -1,114 +1,267 @@
-import { Text, Image, View, useWindowDimensions, StyleSheet } from 'react-native'
+import React from 'react';
+import { Text, View, StyleSheet, TouchableOpacity, useWindowDimensions, ScrollView, StatusBar, Image } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+// Removed vector icons import
 
+const RoleCard = ({ id, title, subtitle, imageSource, color, lightColor, onPress }: any) => {
+    return (
+        <TouchableOpacity style={[styles.card, { borderLeftColor: color }]} onPress={onPress} activeOpacity={0.8}>
+            <View style={[styles.imageContainer, { backgroundColor: lightColor }]}>
+                <Image
+                    source={imageSource}
+                    style={{ width: 40, height: 40, resizeMode: 'contain' }}
+                />
+            </View>
+            <View style={styles.textContainer}>
+                <Text style={styles.cardTitle}>{title}</Text>
+                <Text style={styles.cardSubtitle}>{subtitle}</Text>
+            </View>
+            <Text style={{ color: color, fontSize: 24, fontWeight: 'bold' }}>{'>'}</Text>
+        </TouchableOpacity>
+    );
+};
 
 const OnboardingRole = () => {
-    const { width, height } = useWindowDimensions();
+    const { width } = useWindowDimensions();
 
     return (
-        <SafeAreaView>
-            <View style={styles.headerContainer}>
-                <Image source={require('../assets/images/logo.png')} style={{
-                    width: width * 0.12,
-                    height: width * 0.12,
-                    borderRadius: 10,
-                }} resizeMode="cover" />
-                <Text style={styles.logoText}>
-                    <Text style={styles.logoTextBold}>Buddy</Text>
-                    <Text style={styles.logoTextGreen}>Home</Text>
+        <SafeAreaView style={styles.container}>
+            <StatusBar barStyle="dark-content" backgroundColor="#ffffff" />
+
+            {/* Top Decorative Blob */}
+            <View style={styles.topBlob} />
+
+            <ScrollView contentContainerStyle={styles.scrollContent} showsVerticalScrollIndicator={false}>
+
+                {/* Logo Section */}
+                <View style={styles.headerSection}>
+                    <Image source={require('../assets/images/logo.png')} style={styles.topLogoImage} />
+                    <Text style={styles.mainTitle}>BuddyHome</Text>
+                    <Text style={styles.adoptText}>Adopt. Shop. Care.</Text>
+                    <Text style={styles.greenSubText}>One App. Every Pet. <Text style={{ color: '#0A804A' }}>❤️</Text></Text>
+                </View>
+
+
+
+                {/* Divider Section */}
+                <View style={styles.roleHeaderSection}>
+                    <Text style={styles.chooseRoleText}>Choose your role</Text>
+                    <View style={styles.dividerRow}>
+                        <View style={styles.dividerLine} />
+                        <Text style={{ color: '#0A804A', paddingHorizontal: 10, fontSize: 16 }}>🐾</Text>
+                        <View style={styles.dividerLine} />
+                    </View>
+                </View>
+
+                {/* Role Cards */}
+                <View style={styles.cardsSection}>
+                    <RoleCard
+                        id="pet-lover"
+                        title="I'm a Pet Parent"
+                        subtitle="Adopt or buy pets"
+                        imageSource={require('../assets/userLogo.png')}
+                        color="#0A804A"
+                        lightColor="#E6F5EC"
+                        onPress={() => { }}
+                    />
+                    <RoleCard
+                        id="shop"
+                        title="I'm a Shop Owner"
+                        subtitle="Sell pets & products"
+                        imageSource={require('../assets/shop.png')}
+                        color="#F57C00"
+                        lightColor="#FFF3E0"
+                        onPress={() => { }}
+                    />
+                    <RoleCard
+                        id="ngo"
+                        title="I'm an NGO / Rescuer"
+                        subtitle="Rescue & rehome pets"
+                        imageSource={require('../assets/ngo.png')}
+                        color="#7E57C2"
+                        lightColor="#F3E5F5"
+                        onPress={() => { }}
+                    />
+                </View>
+
+                {/* Bottom Illustration Placeholder */}
+                <View style={styles.bottomIllustrationContainer}>
+                    {/* Recreating the green hill effect purely with views */}
+                    <View style={styles.hillBackground2} />
+                    <View style={styles.hillBackground1} />
+                </View>
+            </ScrollView>
+
+            {/* Login Link */}
+            <TouchableOpacity style={styles.loginContainer}>
+                <Text style={styles.loginText}>
+                    Already have an account? <Text style={styles.loginTextGreen}>Login {'>'}</Text>
                 </Text>
-            </View>
-            <View style={{ alignItems: 'center', justifyContent: 'center', gap: 5, marginTop: 20 }}>
-                <Text style={styles.adoptText}>Adopt. Shop. Care.</Text>
-                <Text style={styles.subText}>One App. Every pet.💚</Text>
-            </View>
-            <View>
-                <View>
-                    <Image source={require('../assets/userLogo.png')} style={{
-                        width: width * 0.45,
-                        height: width * 0.45,
-                        borderRadius: 10,
-                    }} />
-                    <Text>Paw Lover</Text>
-                </View>
-                <View>
-                    <Image source={require('../assets/shop.png')} style={{
-                        width: width * 0.45,
-                        height: width * 0.45,
-                        borderRadius: 10,
-                    }} />
-                    <Text>Shop Owner</Text>
-                </View>
-                <View>
-                    <Image source={require('../assets/ngo.png')} style={{
-                        width: width * 0.45,
-                        height: width * 0.45,
-                        borderRadius: 10,
-                    }} />
-                    <Text>NGO/Rescuer</Text>
-                </View>
-            </View>
+            </TouchableOpacity>
 
         </SafeAreaView>
-    )
-}
+    );
+};
 
 export default OnboardingRole;
+
 const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#ffffff',
     },
-
-    // ── Decorative background ──────────────────────────────
-    blob: {
+    topBlob: {
         position: 'absolute',
-        backgroundColor: '#D6F0E0',
-        opacity: 0.55,
-    },
-    heartDecor: {
-        position: 'absolute',
-        fontSize: 22,
-        color: '#BBBBBB',
-        opacity: 0.55,
-        fontWeight: '300',
+        top: -60,
+        left: -60,
+        width: 180,
+        height: 180,
+        borderRadius: 90,
+        backgroundColor: '#E6F5EC',
+        opacity: 0.6,
     },
 
-    // ── Header ────────────────────────────────────────────
-    headerContainer: {
-        flexDirection: 'row',
+    scrollContent: {
+        flexGrow: 1,
+        paddingBottom: 0,
+    },
+    headerSection: {
         alignItems: 'center',
-        justifyContent: 'center',
-        gap: 8,
-        paddingHorizontal: 20,
-        paddingTop: 8,
-        paddingBottom: 4,
+        marginTop: 50,
     },
-    logoText: {
-        fontSize: 26,
-        letterSpacing: 0.3,
+    topLogoImage: {
+        width: 76,
+        height: 76,
+        borderRadius: 20,
+        marginBottom: 16,
     },
-    logoTextBold: {
-        fontWeight: '900',
-        color: '#111111',
+    mainTitle: {
+        fontSize: 30,
+        fontWeight: '800',
+        color: '#111',
+        marginBottom: 6,
     },
-    logoTextGreen: {
-        fontWeight: '900',
-        color: '#0A804A',
-    },
-    // Adopt text  
     adoptText: {
+        fontSize: 16,
+        color: '#666',
+        fontWeight: '500',
+        marginBottom: 8,
+    },
+    greenSubText: {
+        fontSize: 14,
+        color: '#0A804A',
+        fontWeight: '700',
+    },
+    roleHeaderSection: {
+        alignItems: 'center',
+        marginTop: 40,
+        marginBottom: 20,
+    },
+    chooseRoleText: {
         fontSize: 18,
         fontWeight: '700',
-        letterSpacing: 0.4,
-        color: '#4b4646ff',
+        color: '#111',
+        marginBottom: 10,
     },
-    subText: {
+    dividerRow: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        width: 140,
+    },
+    dividerLine: {
+        flex: 1,
+        height: 1,
+        backgroundColor: '#E0E0E0',
+    },
+    dividerIcon: {
+        paddingHorizontal: 8,
+    },
+    cardsSection: {
+        paddingHorizontal: 20,
+        zIndex: 1,
+    },
+    card: {
+        backgroundColor: '#ffffff',
+        borderRadius: 16,
+        flexDirection: 'row',
+        alignItems: 'center',
+        padding: 16,
+        marginBottom: 16,
+        borderWidth: 1,
+        borderColor: '#F0F0F0',
+        borderLeftWidth: 6,
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.05,
+        shadowRadius: 6,
+        elevation: 2,
+    },
+    imageContainer: {
+        width: 60,
+        height: 60,
+        borderRadius: 30,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    textContainer: {
+        flex: 1,
+        marginLeft: 16,
+    },
+    cardTitle: {
         fontSize: 16,
-        color: '#0A804A',
-        fontWeight: '800',
-        letterSpacing: 0.3,
+        fontWeight: '700',
+        color: '#222',
+        marginBottom: 4,
     },
-
+    cardSubtitle: {
+        fontSize: 14,
+        color: '#777',
+        fontWeight: '400',
+    },
+    bottomIllustrationContainer: {
+        height: 160,
+        marginTop: 20,
+        overflow: 'hidden',
+        position: 'relative',
+        zIndex: 0,
+    },
+    hillBackground1: {
+        position: 'absolute',
+        bottom: -70,
+        left: -50,
+        right: -50,
+        height: 140,
+        backgroundColor: '#E8F5E9',
+        borderTopLeftRadius: 300,
+        borderTopRightRadius: 300,
+        opacity: 0.9,
+    },
+    hillBackground2: {
+        position: 'absolute',
+        bottom: -60,
+        left: -150,
+        right: 0,
+        height: 180,
+        backgroundColor: '#F1F8F3',
+        borderTopLeftRadius: 350,
+        borderTopRightRadius: 350,
+        opacity: 0.7,
+    },
+    loginContainer: {
+        paddingVertical: 20,
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: '#ffffff',
+        borderTopWidth: 1,
+        borderTopColor: '#F5F5F5',
+    },
+    loginText: {
+        fontSize: 15,
+        color: '#666',
+        fontWeight: '500',
+    },
+    loginTextGreen: {
+        color: '#0A804A',
+        fontWeight: '700',
+    },
 });
