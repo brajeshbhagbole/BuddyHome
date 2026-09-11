@@ -21,7 +21,7 @@ const RoleCard = ({ id, title, subtitle, imageSource, color, lightColor, onPress
     );
 };
 
-const OnboardingRole = () => {
+const OnboardingRole = ({ navigation }: any) => {
     const { width } = useWindowDimensions();
 
     return (
@@ -62,7 +62,7 @@ const OnboardingRole = () => {
                         imageSource={require('../assets/userLogo.png')}
                         color="#0A804A"
                         lightColor="#E6F5EC"
-                        onPress={() => { }}
+                        onPress={() => navigation.navigate('Login' as never, { role: 'user' } as never)}
                     />
                     <RoleCard
                         id="shop"
@@ -71,7 +71,7 @@ const OnboardingRole = () => {
                         imageSource={require('../assets/shop.png')}
                         color="#F57C00"
                         lightColor="#FFF3E0"
-                        onPress={() => { }}
+                        onPress={() => navigation.navigate('Login' as never, { role: 'shop' } as never)}
                     />
                     <RoleCard
                         id="ngo"
@@ -80,7 +80,7 @@ const OnboardingRole = () => {
                         imageSource={require('../assets/ngo.png')}
                         color="#7E57C2"
                         lightColor="#F3E5F5"
-                        onPress={() => { }}
+                        onPress={() => navigation.navigate('Login' as never, { role: 'ngo' } as never)}
                     />
                 </View>
 
