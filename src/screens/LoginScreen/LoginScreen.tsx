@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Image, ScrollView, StatusBar, useWindowDimensions } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 import Svg, { Path } from 'react-native-svg';
 
 const GoogleSVG = ({ width = 18, height = 18 }) => (
@@ -14,7 +14,12 @@ const GoogleSVG = ({ width = 18, height = 18 }) => (
 );
 
 const LoginScreen = () => {
-    const navigation = useNavigation();
+    const navigation = useNavigation<any>();
+    const route = useRoute<any>();
+    
+    // Get the role that was passed from OnboardingRole (e.g. 'user', 'shop', or 'ngo')
+    const role = route.params?.role || 'user'; 
+
     const { width } = useWindowDimensions();
 
     return (
@@ -64,7 +69,22 @@ const LoginScreen = () => {
                 </View>
 
                 {/* Google Button */}
-                <TouchableOpacity style={styles.googleButton} activeOpacity={0.8}>
+                <TouchableOpacity 
+                    onPress={() => {
+                        // Navigate based on the selected role
+                        if (role === 'shop') {
+                            // navigation.navigate('ShopHomeScreen'); 
+                            navigation.navigate('UserHomeScreen'); // Placeholder for now
+                        } else if (role === 'ngo') {
+                            // navigation.navigate('NgoHomeScreen');
+                            navigation.navigate('UserHomeScreen'); // Placeholder for now
+                        } else {
+                            navigation.navigate('UserHomeScreen');
+                        }
+                    }} 
+                    style={styles.googleButton} 
+                    activeOpacity={0.8}
+                >
                     <View style={styles.buttonIconWrapper}>
                         <GoogleSVG width={20} height={20} />
                     </View>
