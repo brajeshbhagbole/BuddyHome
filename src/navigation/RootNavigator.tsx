@@ -5,6 +5,7 @@ import WelcomeScreen from "../screens/WelcomeScreen";
 import OnboardingRole from "../screens/OnboardingRole";
 import LoginScreen from "../screens/LoginScreen/LoginScreen";
 import UserHomeScreen from "../screens/user/UserHomeScreen";
+import UserBottomTabs from "./UserBottomTabs";
 
 const Stack = createNativeStackNavigator();
 
@@ -19,7 +20,7 @@ const RootNavigator = () => {
                 <Stack.Screen name="Welcome" component={WelcomeScreen} />
                 <Stack.Screen name="OnboardingRole" component={OnboardingRole} />
                 <Stack.Screen name="Login" component={LoginScreen} />
-                <Stack.Screen name="UserHomeScreen" component={UserHomeScreen} />
+                <Stack.Screen name="UserMain" component={UserBottomTabs} />
             </Stack.Navigator>
 
         </NavigationContainer>
