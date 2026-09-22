@@ -74,12 +74,12 @@ const LoginScreen = () => {
                         // Navigate based on the selected role
                         if (role === 'shop') {
                             // navigation.navigate('ShopHomeScreen'); 
-                            navigation.navigate('UserHomeScreen'); // Placeholder for now
+                            navigation.navigate('UserMain'); // Placeholder for now
                         } else if (role === 'ngo') {
                             // navigation.navigate('NgoHomeScreen');
-                            navigation.navigate('UserHomeScreen'); // Placeholder for now
+                            navigation.navigate('UserMain'); // Placeholder for now
                         } else {
-                            navigation.navigate('UserHomeScreen');
+                            navigation.navigate('UserMain');
                         }
                     }} 
                     style={styles.googleButton} 
