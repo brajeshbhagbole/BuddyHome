@@ -3,15 +3,15 @@
 
 export const colors = {
   // Primary Palette
-  primary: '#1E4D40',          // Deep Emerald Green (Buttons, Active Tabs, Highlights)
-  primaryDark: '#13352C',      // Darker shade for active pressed states
-  primaryLight: '#E8F3EE',     // Very soft light emerald for background pills & badges
-  accent: '#26A69A',           // Vibrant accent green for icons / highlights
+  primary: '#059669',          // Bright Emerald Green (Buttons, Active Tabs, Highlights)
+  primaryDark: '#047857',      // Darker shade for active pressed states
+  primaryLight: '#D1FAE5',     // Very soft light emerald for background pills & badges
+  accent: '#10B981',           // Vibrant accent green for icons / highlights
 
   // Background Colors
-  background: '#F7F8F4',       // Warm Sand / Off-white (App main background)
+  background: '#FFFFFF',       // Pure White (App main background)
   surface: '#FFFFFF',          // Card & Container background
-  surfaceVariant: '#F0F3EF',   // Input field background
+  surfaceVariant: '#ECFDF5',   // Input field background
 
   // Text Colors
   textPrimary: '#1A2321',      // Dark text (Headings, pet names)
@@ -32,8 +32,8 @@ export const colors = {
   info: '#0288D1',
 
   // Borders & Dividers
-  border: '#E2E8E4',
-  borderLight: '#F0F4F1',
+  border: '#D1FAE5',
+  borderLight: '#ECFDF5',
   shadow: '#000000',
 };
 

@@ -42,7 +42,7 @@ const LoginScreen = () => {
                         style={styles.logoImage}
                     />
                     <Text style={styles.mainTitle}>
-                        <Text style={{ color: '#0A804A' }}>Buddy</Text>Home
+                        <Text style={{ color: '#059669' }}>Buddy</Text>Home
                     </Text>
                     <Text style={styles.adoptText}>Adopt. Shop. Care.</Text>
                 </View>
@@ -182,7 +182,7 @@ const styles = StyleSheet.create({
         width: 100,
         height: 100,
         borderRadius: 50,
-        backgroundColor: '#F0F9F4',
+        backgroundColor: '#ECFDF5',
     },
     googleBadge: {
         width: 70,
@@ -200,7 +200,7 @@ const styles = StyleSheet.create({
     },
     dash: {
         position: 'absolute',
-        color: '#0A804A',
+        color: '#059669',
         fontSize: 20,
         fontWeight: 'bold',
         opacity: 0.6,
@@ -224,12 +224,12 @@ const styles = StyleSheet.create({
     googleButton: {
         flexDirection: 'row',
         alignItems: 'center',
-        backgroundColor: '#0A804A',
+        backgroundColor: '#059669',
         width: '100%',
         paddingVertical: 14,
         borderRadius: 30,
         paddingHorizontal: 8,
-        shadowColor: '#0A804A',
+        shadowColor: '#059669',
         shadowOffset: { width: 0, height: 6 },
         shadowOpacity: 0.25,
         shadowRadius: 8,
@@ -276,7 +276,7 @@ const styles = StyleSheet.create({
         width: 32,
         height: 32,
         borderRadius: 16,
-        backgroundColor: '#E8F5E9',
+        backgroundColor: '#D1FAE5',
         justifyContent: 'center',
         alignItems: 'center',
         marginBottom: 10,
@@ -291,7 +291,7 @@ const styles = StyleSheet.create({
         lineHeight: 18,
     },
     linkText: {
-        color: '#0A804A',
+        color: '#059669',
         fontWeight: '600',
         textDecorationLine: 'underline',
     },
@@ -310,7 +310,7 @@ const styles = StyleSheet.create({
         left: -50,
         right: -50,
         height: 140,
-        backgroundColor: '#E8F5E9',
+        backgroundColor: '#D1FAE5',
         borderTopLeftRadius: 300,
         borderTopRightRadius: 300,
         opacity: 0.8,
@@ -321,7 +321,7 @@ const styles = StyleSheet.create({
         left: -150,
         right: 0,
         height: 180,
-        backgroundColor: '#F1F8F3',
+        backgroundColor: '#ECFDF5',
         borderTopLeftRadius: 350,
         borderTopRightRadius: 350,
         opacity: 0.6,
@@ -332,6 +332,6 @@ const styles = StyleSheet.create({
         right: 30,
         fontSize: 24,
         opacity: 0.3,
-        color: '#0A804A',
+        color: '#059669',
     }
 });

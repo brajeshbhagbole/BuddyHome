@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { Platform } from "react-native";
+import SystemNavigationBar from "react-native-system-navigation-bar";
 import WelcomeScreen from "../screens/WelcomeScreen";
 import OnboardingRole from "../screens/OnboardingRole";
 import LoginScreen from "../screens/LoginScreen/LoginScreen";
@@ -10,6 +12,12 @@ import UserBottomTabs from "./UserBottomTabs";
 const Stack = createNativeStackNavigator();
 
 const RootNavigator = () => {
+    useEffect(() => {
+        if (Platform.OS === 'android') {
+            SystemNavigationBar.setNavigationColor('#FFFFFF', 'dark');
+        }
+    }, []);
+
     return (
 
         <NavigationContainer>
