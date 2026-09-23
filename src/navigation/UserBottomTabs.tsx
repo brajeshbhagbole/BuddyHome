@@ -119,7 +119,7 @@ const CustomTabBar = ({ state, navigation }: any) => {
                                 <IconComponent
                                     name={iconName}
                                     size={iconSize}
-                                    color={focused ? colors.primary : '#7f8784ff'}
+                                    color={focused ? colors.primaryDark : '#7f8784ff'}
                                 />
                             </View>
                         )}
@@ -216,7 +216,7 @@ const styles = StyleSheet.create({
         width: 54,
         height: 54,
         borderRadius: 27,
-        backgroundColor: colors.primary,
+        backgroundColor: colors.primaryDark,
         alignItems: 'center',
         justifyContent: 'center',
         marginTop: -12,            // pops above tab bar

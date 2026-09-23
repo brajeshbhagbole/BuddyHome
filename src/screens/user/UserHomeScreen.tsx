@@ -10,10 +10,12 @@ const UserHomeScreen = () => {
             <ScrollView contentContainerStyle={styles.container}>
                 <View style={styles.header}>
                     <Text style={styles.greeting}>Good Morning,</Text>
-                    <Text style={styles.name}>Buddy 🐾</Text>
+
                     <Text style={styles.subtitle}>Find your perfect companion and give them a forever home.</Text>
                 </View>
 
+
+                {/*** Search bar */}
                 <View style={styles.searchContainer}>
                     {/* Left Search Icon */}
                     <Ionicons
@@ -37,6 +39,9 @@ const UserHomeScreen = () => {
                             color={colors.textSecondary}
                         />
                     </View>
+
+
+
                 </View>
             </ScrollView>
         </SafeAreaView>
