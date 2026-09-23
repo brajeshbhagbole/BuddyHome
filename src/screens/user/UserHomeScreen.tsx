@@ -1,7 +1,8 @@
 import React from 'react';
-import { View, Text, StyleSheet, ScrollView } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, TextInput, Dimensions } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import colors from '../../theme/colors';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
 const UserHomeScreen = () => {
     return (
@@ -12,10 +13,30 @@ const UserHomeScreen = () => {
                     <Text style={styles.name}>Buddy 🐾</Text>
                     <Text style={styles.subtitle}>Find your perfect companion and give them a forever home.</Text>
                 </View>
-                
-                <View style={styles.card}>
-                    <Text style={styles.cardTitle}>Featured Pets</Text>
-                    <Text style={styles.cardContent}>Discover lovable pets waiting for a home near you.</Text>
+
+                <View style={styles.searchContainer}>
+                    {/* Left Search Icon */}
+                    <Ionicons
+                        name="search"
+                        size={22}
+                        color={colors.textSecondary}
+                    />
+
+                    {/* Text Input */}
+                    <TextInput
+                        placeholder="Search for pets or locations..."
+                        style={styles.searchInput}
+                        placeholderTextColor={colors.textLight}
+                    />
+
+                    {/* Right Filter Icon */}
+                    <View style={styles.filterButton}>
+                        <Ionicons
+                            name="options-outline"
+                            size={22}
+                            color={colors.textSecondary}
+                        />
+                    </View>
                 </View>
             </ScrollView>
         </SafeAreaView>
@@ -23,6 +44,10 @@ const UserHomeScreen = () => {
 };
 
 export default UserHomeScreen;
+
+const { width } = Dimensions.get('window');
+const scale = width / 375;
+const normalize = (size: number) => Math.round(scale * size);
 
 const styles = StyleSheet.create({
     safeArea: {
@@ -53,25 +78,31 @@ const styles = StyleSheet.create({
         color: colors.textSecondary,
         lineHeight: 20,
     },
-    card: {
-        backgroundColor: colors.surface,
-        borderRadius: 16,
-        padding: 20,
-        elevation: 2,
+    searchContainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        backgroundColor: '#fff',
+        borderRadius: 50,
+        paddingHorizontal: 18,
+        paddingVertical: 4,
+        elevation: 2.4,
         shadowColor: colors.shadow,
         shadowOffset: { width: 0, height: 2 },
         shadowOpacity: 0.05,
         shadowRadius: 8,
     },
-    cardTitle: {
-        fontSize: 18,
-        fontWeight: '700',
-        color: colors.primary,
-        marginBottom: 8,
+    searchInput: {
+        flex: 1,
+        fontSize: normalize(15),
+        color: colors.textPrimary,
+        paddingVertical: normalize(12),
+        marginLeft: normalize(12), // Space between search icon and text
+
     },
-    cardContent: {
-        fontSize: 14,
-        color: colors.textSecondary,
-        lineHeight: 20,
-    },
+    filterButton: {
+        padding: 6,
+        backgroundColor: 'transparent',
+        borderRadius: 20,
+        marginLeft: 8,
+    }
 });
