@@ -1,10 +1,13 @@
 import React from 'react';
-import { View, Text, StyleSheet, ScrollView, TextInput, Dimensions } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, TextInput, Dimensions, Image, TouchableOpacity } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import colors from '../../theme/colors';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
 const UserHomeScreen = () => {
+
+
+
     return (
         <SafeAreaView style={styles.safeArea} edges={['top', 'left', 'right']}>
             <ScrollView contentContainerStyle={styles.container}>
@@ -40,9 +43,46 @@ const UserHomeScreen = () => {
                         />
                     </View>
 
-
-
                 </View>
+
+                <ScrollView horizontal style={styles.petTypeContainer}>
+
+                    <TouchableOpacity style={styles.petType}>
+                        <View style={styles.petTypeIcon}>
+                            <Image source={{ uri: 'https://img.icons8.com/color/48/puppy.png' }} style={{ width: normalize(40), height: normalize(40) }} />
+                        </View>
+
+                        <Text style={styles.petTypeText}>Dogs</Text></TouchableOpacity>
+                    <TouchableOpacity style={styles.petType}>
+                        <View style={styles.petTypeIcon}>
+                            <Image source={{ uri: 'https://img.icons8.com/?size=100&id=80616&format=png&color=000000' }} style={{ width: normalize(40), height: normalize(40) }} />
+                        </View>
+
+                        <Text style={styles.petTypeText}>Cats</Text></TouchableOpacity>
+                    <TouchableOpacity style={styles.petType}>
+                        <View style={styles.petTypeIcon}>
+                            <Image source={{ uri: 'https://img.icons8.com/?size=100&id=80624&format=png&color=000000' }} style={{ width: normalize(40), height: normalize(40) }} />
+                        </View>
+                        <Text style={styles.petTypeText}>Rabbits</Text></TouchableOpacity>
+                    <TouchableOpacity style={styles.petType}>
+                        <View style={styles.petTypeIcon}>
+                            <Image source={{ uri: 'https://img.icons8.com/?size=100&id=80623&format=png&color=000000' }} style={{ width: normalize(40), height: normalize(40) }} />
+                        </View>
+                        <Text style={styles.petTypeText}>Birds</Text></TouchableOpacity>
+                    <TouchableOpacity style={styles.petType}>
+                        <View style={styles.petTypeIcon}>
+                            <Image source={{ uri: 'https://img.icons8.com/?size=100&id=80942&format=png&color=000000' }} style={{ width: normalize(40), height: normalize(40) }} />
+                        </View>
+                        <Text style={styles.petTypeText}>Fish</Text></TouchableOpacity>
+                    <TouchableOpacity style={styles.petType}>
+                        <View style={styles.petTypeIcon}>
+                            <Image source={{ uri: 'https://img.icons8.com/?size=100&id=81226&format=png&color=000000' }} style={{ width: normalize(40), height: normalize(40) }} />
+                        </View>
+                        <Text style={styles.petTypeText}>Hamsters</Text></TouchableOpacity>
+
+                </ScrollView>
+
+
             </ScrollView>
         </SafeAreaView>
     );
@@ -109,5 +149,36 @@ const styles = StyleSheet.create({
         backgroundColor: 'transparent',
         borderRadius: 20,
         marginLeft: 8,
+    },
+    petTypeContainer: {
+        marginTop: normalize(20),
+        flexDirection: 'row',
+
+    },
+    petType: {
+        width: normalize(90),
+        height: normalize(80),
+        alignItems: 'center',
+        backgroundColor: '#fff',
+        paddingVertical: normalize(5),
+        borderRadius: 10,
+        marginRight: normalize(5),
+    },
+    petTypeIcon: {
+        width: normalize(40),
+        height: normalize(40),
+
+        borderRadius: 20,
+        backgroundColor: '#fff',
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginBottom: normalize(5),
+    },
+    petTypeText: {
+        color: colors.textPrimary,
+        fontSize: normalize(12),
+        fontWeight: '600',
+        textTransform: 'capitalize',
+
     }
 });
