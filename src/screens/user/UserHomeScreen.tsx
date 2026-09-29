@@ -1,126 +1,60 @@
 import React from 'react';
-import { View, Text, StyleSheet, FlatList, TextInput, Dimensions, Image, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, FlatList, Dimensions } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import colors from '../../theme/colors';
-import Ionicons from 'react-native-vector-icons/Ionicons';
 import PetFilter from '../../components/DashboardComponents/PetFilter';
+import PetCard, { Pet } from '../../components/DashboardComponents/PetCard';
+import HomeSearchBar from '../../components/DashboardComponents/HomeSearchBar';
+
+const pets: Pet[] = [
+    {
+        id: '1',
+        name: 'Coco',
+        location: 'Indore, M.P',
+        age: '4 m+',
+        type: 'adopt',
+        price: null,
+        image: 'https://plus.unsplash.com/premium_photo-1760893696251-4219904ab2a8?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+    },
+    {
+        id: '2',
+        name: 'Oreo',
+        location: 'Nagpur, M.H',
+        age: '2 yrs',
+        type: 'sell',
+        price: '₹2,500',
+        image: 'https://media.istockphoto.com/id/185304274/photo/kitten.jpg?s=2048x2048&w=is&k=20&c=D4pPgqpVMG1xpLxA3qNgdMNn9rxKD0zfpHLZbs7hddg=',
+    },
+];
+
+const ListHeader = () => (
+    <>
+        <View style={styles.header}>
+            <Text style={styles.greeting}>Good Morning,</Text>
+            <Text style={styles.subtitle}>Find your perfect companion and give them a forever home.</Text>
+        </View>
+
+        <HomeSearchBar />
+
+        <PetFilter />
+
+        <Text style={styles.sectionTitle}>Featured pets for you</Text>
+    </>
+);
 
 const UserHomeScreen = () => {
-    const pets = [
-        {
-            id: '1',
-            name: 'Coco',
-            location: 'Indore, M.P',
-            age: '4 m+',
-            type: 'adopt',   // 'adopt' ya 'sell'
-            price: null,
-            image: 'https://plus.unsplash.com/premium_photo-1760893696251-4219904ab2a8?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-        },
-        {
-            id: '2',
-            name: 'Oreo',
-            location: 'Nagpur, M.H',
-            age: '2 yrs',
-            type: 'sell',
-            price: '₹2,500',
-            image: 'https://media.istockphoto.com/id/185304274/photo/kitten.jpg?s=2048x2048&w=is&k=20&c=D4pPgqpVMG1xpLxA3qNgdMNn9rxKD0zfpHLZbs7hddg=',
-        },
-    ];
-
-    const ListHeader = () => (
-        <>
-            <View style={styles.header}>
-                <Text style={styles.greeting}>Good Morning,</Text>
-
-                <Text style={styles.subtitle}>Find your perfect companion and give them a forever home.</Text>
-            </View>
-
-
-            {/*** Search bar */}
-            <View style={styles.searchContainer}>
-                {/* Left Search Icon */}
-                <Ionicons
-                    name="search"
-                    size={22}
-                    color={colors.textSecondary}
-                />
-
-                {/* Text Input */}
-                <TextInput
-                    placeholder="Search for pets or locations..."
-                    style={styles.searchInput}
-                    placeholderTextColor={colors.textLight}
-                />
-
-                {/* Right Filter Icon */}
-                <View style={styles.filterButton}>
-                    <Ionicons
-                        name="options-outline"
-                        size={22}
-                        color={colors.textSecondary}
-                    />
-                </View>
-
-            </View>
-
-            {/* pet type              */}
-            <PetFilter />
-        </>
-    );
-    const renderItem = ({ item }: { item: any }) => (
-        <View style={styles.petListCard}>
-            <View style={styles.petCardImg}>
-                <Image source={{ uri: item.image }} style={styles.petImage} />
-            </View>
-            <View style={styles.petCardInfo}>
-                <View style={styles.petCardTop}>
-                    <View>
-                        <Text style={styles.petName}>{item.name}</Text>
-                    </View>
-                    <View style={styles.petCardActions}>
-                        <TouchableOpacity style={styles.petCardActionButton}>
-                            <Ionicons name="heart-outline" size={22} color={colors.textSecondary} />
-                        </TouchableOpacity>
-                    </View>
-                </View>
-                <View style={styles.petLocationContainer}>
-                    <Ionicons name="location-outline" size={12} color={colors.textSecondary} />
-                    <Text style={styles.petLocation}>{item.location}</Text>
-                </View>
-                <View style={styles.petAgeContainer}>
-                    <Ionicons name="calendar-outline" size={12} color={colors.textSecondary} />
-                    <Text style={styles.petLocation}>{item.age}</Text>
-                </View>
-                <View style={[styles.priceTag, { backgroundColor: item.type === 'adopt' ? '#d1f0d9' : '#fcdcd9' }]}>
-                    <Ionicons name={item.type === 'adopt' ? "gift" : "pricetag"} size={12} color={item.type === 'adopt' ? "#0d5926" : "#8c1c1c"} />
-                    <Text style={[styles.priceText, { color: item.type === 'adopt' ? "#0d5926" : "#8c1c1c" }]}>{item.type === 'adopt' ? "Adopt" : item.price}</Text>
-                </View>
-            </View>
-
-        </View>
-    )
-
     return (
-        <SafeAreaView style={styles.safeArea} edges={['top', 'left', 'right']} >
+        <SafeAreaView style={styles.safeArea} edges={['top', 'left', 'right']}>
             <FlatList
                 data={pets}
-                renderItem={renderItem}
+                renderItem={({ item }) => <PetCard pet={item} />}
                 keyExtractor={(item) => item.id}
                 contentContainerStyle={styles.container}
                 ListHeaderComponent={<ListHeader />}
                 numColumns={2}
                 columnWrapperStyle={styles.columnWrapper}
-
                 showsVerticalScrollIndicator={false}
             />
-
-
-
-
-
-
-
-
         </SafeAreaView>
     );
 };
@@ -128,13 +62,12 @@ const UserHomeScreen = () => {
 export default UserHomeScreen;
 
 const { width } = Dimensions.get('window');
-const scale = width / 375;
-const normalize = (size: number) => Math.round(scale * size);
+const normalize = (size: number) => Math.round((width / 375) * size);
 
 const styles = StyleSheet.create({
     safeArea: {
         flex: 1,
-        backgroundColor: '#e6f2eaff',
+        backgroundColor: '#f1f7f1ff',
     },
     container: {
         flexGrow: 1,
@@ -149,148 +82,10 @@ const styles = StyleSheet.create({
         color: colors.textSecondary,
         marginBottom: 4,
     },
-    name: {
-        fontSize: 28,
-        fontWeight: 'bold',
-        color: colors.textPrimary,
-        marginBottom: 8,
-    },
     subtitle: {
         fontSize: 14,
         color: colors.textSecondary,
         lineHeight: 20,
-    },
-    searchContainer: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        backgroundColor: '#fff',
-        borderRadius: 50,
-        paddingHorizontal: 18,
-        paddingVertical: 4,
-        elevation: 2.4,
-        shadowColor: colors.shadow,
-        shadowOffset: { width: 0, height: 2 },
-        shadowOpacity: 0.05,
-        shadowRadius: 8,
-    },
-    searchInput: {
-        flex: 1,
-        fontSize: normalize(15),
-        color: colors.textPrimary,
-        paddingVertical: normalize(12),
-        marginLeft: normalize(12), // Space between search icon and text
-
-    },
-    filterButton: {
-        padding: 6,
-        backgroundColor: 'transparent',
-        borderRadius: 20,
-        marginLeft: 8,
-
-    },
-    petListRow: { flexDirection: "row", justifyContent: 'space-between', alignSelf: 'center', gap: normalize(15) },
-    petListCard: {
-        marginTop: normalize(20),
-        width: normalize(155),
-        height: normalize(210),
-        backgroundColor: '#fff',
-        borderRadius: normalize(16),
-        padding: normalize(12),
-        elevation: 3,
-        shadowColor: colors.shadow,
-        shadowOffset: { width: 0, height: 2 },
-        shadowOpacity: 0.15,
-        shadowRadius: 6,
-        alignSelf: 'center',
-    },
-    petCardImg: {
-        width: normalize(150),
-        height: normalize(130),
-        borderRadius: normalize(16),
-        backgroundColor: '#b06060ff',
-        alignSelf: 'center',
-        marginTop: normalize(-10)
-
-    },
-    petImage: {
-        width: normalize(150),
-        height: normalize(130),
-        borderRadius: normalize(16),
-        resizeMode: 'cover',
-        alignSelf: 'center'
-    },
-    petCardInfo: {
-        width: normalize(150),
-
-        borderRadius: normalize(16),
-        alignSelf: 'center',
-        marginLeft: normalize(20)
-    },
-    petCardTop: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-
-    },
-    petCardActions: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        paddingRight: normalize(15)
-
-    },
-    petCardActionButton: {
-        justifyContent: 'center',
-        alignItems: 'center',
-        padding: normalize(4),
-    },
-    petName: {
-        fontSize: normalize(15),
-        fontWeight: 700,
-        color: '#3F3D3D',
-        marginBottom: normalize(1),
-        letterSpacing: normalize(1),
-    },
-    petLocationContainer: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        gap: normalize(5),
-
-    },
-    petLocation: {
-        fontSize: normalize(11),
-        color: '#9B9999',
-        marginBottom: normalize(1)
-    },
-    petAgeContainer: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        gap: normalize(5),
-        marginTop: normalize(2)
-    },
-    petAge: {
-        fontSize: normalize(11),
-        color: '#9B9999',
-        marginBottom: normalize(1)
-    },
-    priceTag: {
-        position: 'absolute',
-        bottom: 0,
-        right: normalize(15),
-        flexDirection: 'row',
-        alignItems: 'center',
-        paddingHorizontal: normalize(8),
-        paddingVertical: normalize(4),
-        borderRadius: normalize(12),
-        gap: normalize(4),
-    },
-    priceText: {
-        fontSize: normalize(10),
-        fontWeight: 'bold',
-    },
-    columnWrapper: {
-        justifyContent: 'space-between',
-        paddingHorizontal: 4,
     },
     sectionTitle: {
         fontSize: normalize(16),
@@ -299,5 +94,8 @@ const styles = StyleSheet.create({
         marginTop: normalize(20),
         marginBottom: normalize(4),
     },
-
+    columnWrapper: {
+        justifyContent: 'space-between',
+        paddingHorizontal: 4,
+    },
 });
