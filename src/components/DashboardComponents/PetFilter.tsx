@@ -13,7 +13,7 @@ const PetFilter = () => {
         { name: "Fish", image: "https://img.icons8.com/?size=100&id=80942&format=png&color=000000" },
         { name: "Hamsters", image: "https://img.icons8.com/?size=100&id=81226&format=png&color=000000" }
     ]
-    return (<ScrollView horizontal style={styles.petTypeContainer}>
+    return (<ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.petTypeContainer}>
 
         {petType.map((petType, index) => (<TouchableOpacity style={styles.petType}>
 
@@ -40,8 +40,8 @@ const styles = StyleSheet.create({
         flexGrow: 0,
     },
     petType: {
-        width: normalize(80),
-        height: normalize(100),
+        width: normalize(85),
+        height: normalize(85),
         alignItems: 'center',
         backgroundColor: '#fff',
         paddingVertical: normalize(5),

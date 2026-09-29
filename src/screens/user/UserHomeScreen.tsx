@@ -1,131 +1,126 @@
 import React from 'react';
-import { View, Text, StyleSheet, ScrollView, TextInput, Dimensions, Image, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, FlatList, TextInput, Dimensions, Image, TouchableOpacity } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import colors from '../../theme/colors';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import PetFilter from '../../components/DashboardComponents/PetFilter';
+
 const UserHomeScreen = () => {
+    const pets = [
+        {
+            id: '1',
+            name: 'Coco',
+            location: 'Indore, M.P',
+            age: '4 m+',
+            type: 'adopt',   // 'adopt' ya 'sell'
+            price: null,
+            image: 'https://plus.unsplash.com/premium_photo-1760893696251-4219904ab2a8?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+        },
+        {
+            id: '2',
+            name: 'Oreo',
+            location: 'Nagpur, M.H',
+            age: '2 yrs',
+            type: 'sell',
+            price: '₹2,500',
+            image: 'https://media.istockphoto.com/id/185304274/photo/kitten.jpg?s=2048x2048&w=is&k=20&c=D4pPgqpVMG1xpLxA3qNgdMNn9rxKD0zfpHLZbs7hddg=',
+        },
+    ];
+
+    const ListHeader = () => (
+        <>
+            <View style={styles.header}>
+                <Text style={styles.greeting}>Good Morning,</Text>
+
+                <Text style={styles.subtitle}>Find your perfect companion and give them a forever home.</Text>
+            </View>
 
 
+            {/*** Search bar */}
+            <View style={styles.searchContainer}>
+                {/* Left Search Icon */}
+                <Ionicons
+                    name="search"
+                    size={22}
+                    color={colors.textSecondary}
+                />
 
-    return (
-        <SafeAreaView style={styles.safeArea} edges={['top', 'left', 'right']} >
-            <ScrollView contentContainerStyle={styles.container}>
-                <View style={styles.header}>
-                    <Text style={styles.greeting}>Good Morning,</Text>
+                {/* Text Input */}
+                <TextInput
+                    placeholder="Search for pets or locations..."
+                    style={styles.searchInput}
+                    placeholderTextColor={colors.textLight}
+                />
 
-                    <Text style={styles.subtitle}>Find your perfect companion and give them a forever home.</Text>
-                </View>
-
-
-                {/*** Search bar */}
-                <View style={styles.searchContainer}>
-                    {/* Left Search Icon */}
+                {/* Right Filter Icon */}
+                <View style={styles.filterButton}>
                     <Ionicons
-                        name="search"
+                        name="options-outline"
                         size={22}
                         color={colors.textSecondary}
                     />
-
-                    {/* Text Input */}
-                    <TextInput
-                        placeholder="Search for pets or locations..."
-                        style={styles.searchInput}
-                        placeholderTextColor={colors.textLight}
-                    />
-
-                    {/* Right Filter Icon */}
-                    <View style={styles.filterButton}>
-                        <Ionicons
-                            name="options-outline"
-                            size={22}
-                            color={colors.textSecondary}
-                        />
-                    </View>
-
                 </View>
 
-                {/* pet type              */}
-                <PetFilter />
+            </View>
 
-
-                {/* Pet list */}
-                <View style={styles.petListRow}>
-                    <View style={styles.petListCard}>
-                        <View style={styles.petCardImg}>
-                            <Image source={{ uri: 'https://plus.unsplash.com/premium_photo-1760893696251-4219904ab2a8?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D' }} style={styles.petImage} />
-                        </View>
-
-
-
-                        <View style={styles.petCardInfo}>
-
-
-
-                            <View style={styles.petCardTop}>
-                                <View>
-                                    <Text style={styles.petName}>Coco</Text>
-                                </View>
-                                <View style={styles.petCardActions}>
-                                    <TouchableOpacity style={styles.petCardActionButton}>
-                                        <Ionicons name="heart-outline" size={22} color={colors.textSecondary} />
-                                    </TouchableOpacity>
-                                </View>
-
-                            </View>
-
-
-
-                            <View style={styles.petLocationContainer}>
-                                <Ionicons name="location-outline" size={12} color={colors.textSecondary} />
-                                <Text style={styles.petLocation}>Indore,M.P</Text>
-                            </View>
-                            <View style={styles.petAgeContainer}>
-                                <Ionicons name="calendar-outline" size={12} color={colors.textSecondary} />
-                                <Text style={styles.petLocation}>4 m+</Text>
-                            </View>
-                            <View style={[styles.priceTag, { backgroundColor: '#d1f0d9' }]}>
-                                <Ionicons name="gift" size={12} color="#0d5926" />
-                                <Text style={[styles.priceText, { color: '#0d5926' }]}>Free</Text>
-                            </View>
-                        </View>
+            {/* pet type              */}
+            <PetFilter />
+        </>
+    );
+    const renderItem = ({ item }: { item: any }) => (
+        <View style={styles.petListCard}>
+            <View style={styles.petCardImg}>
+                <Image source={{ uri: item.image }} style={styles.petImage} />
+            </View>
+            <View style={styles.petCardInfo}>
+                <View style={styles.petCardTop}>
+                    <View>
+                        <Text style={styles.petName}>{item.name}</Text>
                     </View>
-                    <View style={styles.petListCard}>
-                        <View style={styles.petCardImg}>
-                            <Image source={{ uri: 'https://media.istockphoto.com/id/185304274/photo/kitten.jpg?s=2048x2048&w=is&k=20&c=D4pPgqpVMG1xpLxA3qNgdMNn9rxKD0zfpHLZbs7hddg=' }} style={styles.petImage} />
-                        </View>
-                        <View style={styles.petCardInfo}>
-                            <View style={styles.petCardTop}>
-                                <View>
-                                    <Text style={styles.petName}>Oreo</Text>
-                                </View>
-                                <View style={styles.petCardActions}>
-                                    <TouchableOpacity style={styles.petCardActionButton}>
-                                        <Ionicons name="heart-outline" size={22} color={colors.textSecondary} />
-                                    </TouchableOpacity>
-                                </View>
-                            </View>
-                            <View style={styles.petLocationContainer}>
-                                <Ionicons name="location-outline" size={12} color={colors.textSecondary} />
-                                <Text style={styles.petLocation}>Nagpur,M.H</Text>
-                            </View>
-                            <View style={styles.petAgeContainer}>
-                                <Ionicons name="calendar-outline" size={12} color={colors.textSecondary} />
-                                <Text style={styles.petLocation}>2 yrs</Text>
-                            </View>
-                            <View style={[styles.priceTag, { backgroundColor: '#fcdcd9' }]}>
-                                <Ionicons name="pricetag" size={12} color="#8c1c1c" />
-                                <Text style={[styles.priceText, { color: '#8c1c1c' }]}>₹2,500</Text>
-                            </View>
-                        </View>
-
+                    <View style={styles.petCardActions}>
+                        <TouchableOpacity style={styles.petCardActionButton}>
+                            <Ionicons name="heart-outline" size={22} color={colors.textSecondary} />
+                        </TouchableOpacity>
                     </View>
-
-
-
-
                 </View>
-            </ScrollView>
+                <View style={styles.petLocationContainer}>
+                    <Ionicons name="location-outline" size={12} color={colors.textSecondary} />
+                    <Text style={styles.petLocation}>{item.location}</Text>
+                </View>
+                <View style={styles.petAgeContainer}>
+                    <Ionicons name="calendar-outline" size={12} color={colors.textSecondary} />
+                    <Text style={styles.petLocation}>{item.age}</Text>
+                </View>
+                <View style={[styles.priceTag, { backgroundColor: item.type === 'adopt' ? '#d1f0d9' : '#fcdcd9' }]}>
+                    <Ionicons name={item.type === 'adopt' ? "gift" : "pricetag"} size={12} color={item.type === 'adopt' ? "#0d5926" : "#8c1c1c"} />
+                    <Text style={[styles.priceText, { color: item.type === 'adopt' ? "#0d5926" : "#8c1c1c" }]}>{item.type === 'adopt' ? "Adopt" : item.price}</Text>
+                </View>
+            </View>
+
+        </View>
+    )
+
+    return (
+        <SafeAreaView style={styles.safeArea} edges={['top', 'left', 'right']} >
+            <FlatList
+                data={pets}
+                renderItem={renderItem}
+                keyExtractor={(item) => item.id}
+                contentContainerStyle={styles.container}
+                ListHeaderComponent={<ListHeader />}
+                numColumns={2}
+                columnWrapperStyle={styles.columnWrapper}
+
+                showsVerticalScrollIndicator={false}
+            />
+
+
+
+
+
+
+
+
         </SafeAreaView>
     );
 };
@@ -139,7 +134,7 @@ const normalize = (size: number) => Math.round(scale * size);
 const styles = StyleSheet.create({
     safeArea: {
         flex: 1,
-        backgroundColor: '#f3f2f3',
+        backgroundColor: '#e6f2eaff',
     },
     container: {
         flexGrow: 1,
@@ -292,5 +287,17 @@ const styles = StyleSheet.create({
     priceText: {
         fontSize: normalize(10),
         fontWeight: 'bold',
-    }
+    },
+    columnWrapper: {
+        justifyContent: 'space-between',
+        paddingHorizontal: 4,
+    },
+    sectionTitle: {
+        fontSize: normalize(16),
+        fontWeight: '700',
+        color: '#3F3D3D',
+        marginTop: normalize(20),
+        marginBottom: normalize(4),
+    },
+
 });
