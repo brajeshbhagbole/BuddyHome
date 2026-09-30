@@ -6,16 +6,16 @@ import colors from "../../theme/colors";
 const PetFilter = () => {
 
     const petType = [
-        { name: "Dogs", image: "https://img.icons8.com/color/48/puppy.png" },
-        { name: "Cats", image: "https://img.icons8.com/?size=100&id=80616&format=png&color=000000" },
-        { name: "Rabbits", image: "https://img.icons8.com/?size=100&id=80624&format=png&color=000000" },
-        { name: "Birds", image: "https://img.icons8.com/?size=100&id=80623&format=png&color=000000" },
-        { name: "Fish", image: "https://img.icons8.com/?size=100&id=80942&format=png&color=000000" },
-        { name: "Hamsters", image: "https://img.icons8.com/?size=100&id=81226&format=png&color=000000" }
+        { id: 1, name: "Dogs", image: "https://img.icons8.com/color/48/puppy.png" },
+        { id: 2, name: "Cats", image: "https://img.icons8.com/?size=100&id=80616&format=png&color=000000" },
+        { id: 3, name: "Rabbits", image: "https://img.icons8.com/?size=100&id=80624&format=png&color=000000" },
+        { id: 4, name: "Birds", image: "https://img.icons8.com/?size=100&id=80623&format=png&color=000000" },
+        { id: 5, name: "Fish", image: "https://img.icons8.com/?size=100&id=80942&format=png&color=000000" },
+        { id: 6, name: "Hamsters", image: "https://img.icons8.com/?size=100&id=81226&format=png&color=000000" }
     ]
     return (<ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.petTypeContainer}>
 
-        {petType.map((petType, index) => (<TouchableOpacity style={styles.petType}>
+        {petType.map((petType) => (<TouchableOpacity style={styles.petType} key={petType.id}>
 
             <View style={styles.petTypeIcon}>
                 <Image source={{ uri: petType.image }} style={{ width: normalize(50), height: normalize(50) }} />

@@ -70,7 +70,7 @@ const normalize = (size: number) => Math.round((width / 375) * size);
 const styles = StyleSheet.create({
     petListCard: {
         marginTop: normalize(20),
-        width: normalize(155),
+        width: normalize(165),
         height: normalize(210),
         backgroundColor: '#fff',
         borderRadius: normalize(16),
@@ -83,7 +83,7 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
     },
     petCardImg: {
-        width: normalize(150),
+        width: normalize(155),
         height: normalize(130),
         borderRadius: normalize(16),
         backgroundColor: '#b06060ff',
@@ -91,17 +91,17 @@ const styles = StyleSheet.create({
         marginTop: normalize(-10),
     },
     petImage: {
-        width: normalize(150),
+        width: normalize(155),
         height: normalize(130),
         borderRadius: normalize(16),
         resizeMode: 'cover',
         alignSelf: 'center',
     },
     petCardInfo: {
-        width: normalize(150),
+        width: '100%',
         borderRadius: normalize(16),
         alignSelf: 'center',
-        marginLeft: normalize(20),
+        marginTop: normalize(8),
     },
     petCardTop: {
         flexDirection: 'row',
@@ -112,7 +112,6 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
-        paddingRight: normalize(15),
     },
     petCardActionButton: {
         justifyContent: 'center',
@@ -145,7 +144,7 @@ const styles = StyleSheet.create({
     priceTag: {
         position: 'absolute',
         bottom: 0,
-        right: normalize(15),
+        right: normalize(0),
         flexDirection: 'row',
         alignItems: 'center',
         paddingHorizontal: normalize(8),

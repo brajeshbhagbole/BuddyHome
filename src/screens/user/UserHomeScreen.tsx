@@ -24,6 +24,105 @@ const pets: Pet[] = [
         type: 'sell',
         price: '₹2,500',
         image: 'https://media.istockphoto.com/id/185304274/photo/kitten.jpg?s=2048x2048&w=is&k=20&c=D4pPgqpVMG1xpLxA3qNgdMNn9rxKD0zfpHLZbs7hddg=',
+    }, {
+        id: '3',
+        name: 'Bruno',
+        location: 'Bhopal, M.P',
+        age: '1 yr',
+        type: 'adopt',
+        price: null,
+        image:
+            'https://images.unsplash.com/photo-1552053831-71594a27632d?q=80&w=687&auto=format&fit=crop',
+    },
+    {
+        id: '4',
+        name: 'Milo',
+        location: 'Pune, M.H',
+        age: '8 m+',
+        type: 'sell',
+        price: '₹4,500',
+        image:
+            'https://images.unsplash.com/photo-1518791841217-8f162f1e1131?q=80&w=687&auto=format&fit=crop',
+    },
+    {
+        id: '5',
+        name: 'Simba',
+        location: 'Mumbai, M.H',
+        age: '1.5 yrs',
+        type: 'adopt',
+        price: null,
+        image:
+            'https://images.unsplash.com/photo-1543466835-00a7907e9de1?q=80&w=687&auto=format&fit=crop',
+    },
+    {
+        id: '6',
+        name: 'Luna',
+        location: 'Delhi, D.L',
+        age: '6 m+',
+        type: 'sell',
+        price: '₹3,800',
+        image:
+            'https://images.unsplash.com/photo-1587300003388-59208cc962cb?q=80&w=687&auto=format&fit=crop',
+    },
+    {
+        id: '7',
+        name: 'Max',
+        location: 'Jaipur, R.J',
+        age: '2 yrs',
+        type: 'adopt',
+        price: null,
+        image:
+            'https://images.unsplash.com/photo-1558788353-f76d92427f16?q=80&w=687&auto=format&fit=crop',
+    },
+    {
+        id: '8',
+        name: 'Bella',
+        location: 'Indore, M.P',
+        age: '10 m+',
+        type: 'sell',
+        price: '₹5,000',
+        image:
+            'https://images.unsplash.com/photo-1546182990-dffeafbe841d?q=80&w=687&auto=format&fit=crop',
+    },
+    {
+        id: '9',
+        name: 'Rocky',
+        location: 'Ahmedabad, G.J',
+        age: '3 yrs',
+        type: 'adopt',
+        price: null,
+        image:
+            'https://images.unsplash.com/photo-1568572933382-74d440642117?q=80&w=687&auto=format&fit=crop',
+    },
+    {
+        id: '10',
+        name: 'Daisy',
+        location: 'Hyderabad, T.S',
+        age: '5 m+',
+        type: 'sell',
+        price: '₹3,200',
+        image:
+            'https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?q=80&w=687&auto=format&fit=crop',
+    },
+    {
+        id: '11',
+        name: 'Charlie',
+        location: 'Kolkata, W.B',
+        age: '1 yr',
+        type: 'adopt',
+        price: null,
+        image:
+            'https://images.unsplash.com/photo-1554190777-2f3a6c4f3a6c?q=80&w=687&auto=format&fit=crop',
+    },
+    {
+        id: '12',
+        name: 'Leo',
+        location: 'Nashik, M.H',
+        age: '9 m+',
+        type: 'sell',
+        price: '₹4,200',
+        image:
+            'https://images.unsplash.com/photo-1517849845537-4d257902454a?q=80&w=687&auto=format&fit=crop',
     },
 ];
 
@@ -96,6 +195,7 @@ const styles = StyleSheet.create({
     },
     columnWrapper: {
         justifyContent: 'space-between',
-        paddingHorizontal: 4,
+        paddingHorizontal: 1,
+        gap: 10,
     },
 });
