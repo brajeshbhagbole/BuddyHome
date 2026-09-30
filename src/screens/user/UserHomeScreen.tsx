@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet, FlatList, Dimensions } from 'react-native';
+import { View, Text, StyleSheet, FlatList, Dimensions, StatusBar } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import colors from '../../theme/colors';
 import PetFilter from '../../components/DashboardComponents/PetFilter';
@@ -127,16 +127,17 @@ const pets: Pet[] = [
 ];
 
 const ListHeader = () => (
-    <>
+    <>  <View style={styles.headerContainer}>
         <View style={styles.header}>
             <Text style={styles.greeting}>Good Morning,</Text>
             <Text style={styles.subtitle}>Find your perfect companion and give them a forever home.</Text>
         </View>
 
+
         <HomeSearchBar />
 
         <PetFilter />
-
+    </View>
         <Text style={styles.sectionTitle}>Featured pets for you</Text>
     </>
 );
@@ -144,16 +145,19 @@ const ListHeader = () => (
 const UserHomeScreen = () => {
     return (
         <SafeAreaView style={styles.safeArea} edges={['top', 'left', 'right']}>
-            <FlatList
-                data={pets}
-                renderItem={({ item }) => <PetCard pet={item} />}
-                keyExtractor={(item) => item.id}
-                contentContainerStyle={styles.container}
-                ListHeaderComponent={<ListHeader />}
-                numColumns={2}
-                columnWrapperStyle={styles.columnWrapper}
-                showsVerticalScrollIndicator={false}
-            />
+            <StatusBar backgroundColor="#ffffff" barStyle="dark-content" />
+            <View style={styles.screenBackground}>
+                <FlatList
+                    data={pets}
+                    renderItem={({ item }) => <PetCard pet={item} />}
+                    keyExtractor={(item) => item.id}
+                    contentContainerStyle={styles.container}
+                    ListHeaderComponent={<ListHeader />}
+                    numColumns={2}
+                    columnWrapperStyle={styles.columnWrapper}
+                    showsVerticalScrollIndicator={false}
+                />
+            </View>
         </SafeAreaView>
     );
 };
@@ -166,11 +170,33 @@ const normalize = (size: number) => Math.round((width / 375) * size);
 const styles = StyleSheet.create({
     safeArea: {
         flex: 1,
-        backgroundColor: '#f1f7f1ff',
+        backgroundColor: '#ffffff',   // status bar ke peeche white
+    },
+    screenBackground: {
+        flex: 1,
+        backgroundColor: '#f1f7f1ff', // baaki screen ka original green
     },
     container: {
         flexGrow: 1,
-        padding: 20,
+        paddingHorizontal: 20,
+        paddingTop: 0,
+        paddingBottom: 20,
+    },
+    headerContainer: {
+        marginHorizontal: -20,
+        marginTop: -20,
+        paddingHorizontal: 20,
+        paddingTop: 20,
+        paddingBottom: normalize(20),
+        marginBottom: normalize(10),
+        backgroundColor: '#ffffff',
+        borderBottomLeftRadius: normalize(24),
+        borderBottomRightRadius: normalize(24),
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 4 },
+        shadowOpacity: 0.06,
+        shadowRadius: 8,
+        elevation: 4,
     },
     header: {
         marginTop: 10,
