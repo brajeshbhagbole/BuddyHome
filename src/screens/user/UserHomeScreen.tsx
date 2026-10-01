@@ -1,7 +1,8 @@
 import React from 'react';
-import { View, Text, StyleSheet, FlatList, Dimensions, StatusBar } from 'react-native';
+import { View, Text, StyleSheet, FlatList, Dimensions, StatusBar, Image } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import colors from '../../theme/colors';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 import PetFilter from '../../components/DashboardComponents/PetFilter';
 import PetCard, { Pet } from '../../components/DashboardComponents/PetCard';
 import HomeSearchBar from '../../components/DashboardComponents/HomeSearchBar';
@@ -129,8 +130,21 @@ const pets: Pet[] = [
 const ListHeader = () => (
     <>  <View style={styles.headerContainer}>
         <View style={styles.header}>
-            <Text style={styles.greeting}>Good Morning,</Text>
-            <Text style={styles.subtitle}>Find your perfect companion and give them a forever home.</Text>
+            <View>
+
+                {/* location drop down */}
+                <View style={{ flexDirection: 'row', alignItems: 'center', gap: 5, }}>
+                    <Ionicons name="location-outline" size={20} color={colors.textPrimary} />
+                    <Text style={{ color: colors.textPrimary, fontWeight: 'bold' }}>Indore, M.P</Text>
+                    <Ionicons name="chevron-down-outline" size={19} color={colors.textPrimary} />
+                </View>
+
+
+
+            </View>
+            <View>
+
+            </View>
         </View>
 
 
