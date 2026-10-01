@@ -155,7 +155,7 @@ const ListHeader = () => (
                 <View style={styles.heroTextContainer}>
                     <View style={styles.heroBadge}>
                         <Ionicons name="sparkles" size={12} color="#059669" />
-                        <Text style={styles.heroBadgeText}>Adopt Don't Shop</Text>
+                        <Text style={styles.heroBadgeText}>Adopt, Shop & Care</Text>
                     </View>
                     <Text style={styles.heroTitle}>Find Your New Best Friend 🐾</Text>
                     <Text style={styles.heroSubtitle}>Rescued & lovable pets nearby waiting for a home.</Text>
