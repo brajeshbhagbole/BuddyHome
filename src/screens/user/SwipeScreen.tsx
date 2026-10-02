@@ -109,20 +109,36 @@ const topPicks = [
 
 const SwipeScreen = () => {
   const scrollX = useRef(new Animated.Value(0)).current;
+  const cardWidth = normalizeWidth(185);
+  const paddingLeft = (width - cardWidth) / 2;
+
   return (
     <SafeAreaView style={styles.safeArea} edges={['top', 'left', 'right']}>
       <View style={styles.header}>
         <Text style={styles.headerTitle}>Top Pick's</Text>
       </View>
       <View style={styles.container}>
-        <Animated.FlatList showsHorizontalScrollIndicator={false} horizontal data={topPicks} keyExtractor={(item) => item.id} renderItem={({ item, index }) => <SwipePetCards pet={item} index={index} scrollX={scrollX} />}
+        <Animated.FlatList
+          showsHorizontalScrollIndicator={false}
+          horizontal
+          data={topPicks}
+          keyExtractor={(item) => item.id}
+          renderItem={({ item, index }) => (
+            <SwipePetCards pet={item} index={index} scrollX={scrollX} />
+          )}
           onScroll={Animated.event(
             [{ nativeEvent: { contentOffset: { x: scrollX } } }],
             { useNativeDriver: true }
           )}
           scrollEventThrottle={16}
-          snapToInterval={normalizeWidth(185) + normalizeWidth(20)} snapToAlignment="center" decelerationRate="fast"
-          contentContainerStyle={{ paddingHorizontal: (width - normalizeWidth(185)) / 2 }}
+          snapToInterval={normalizeWidth(185) + normalizeWidth(20)}
+          snapToAlignment="start"
+          decelerationRate="fast"
+          contentContainerStyle={{
+            paddingLeft: paddingLeft,
+            paddingRight: paddingLeft - normalizeWidth(20),
+            alignItems: 'center',
+          }}
         />
       </View>
     </SafeAreaView>
@@ -132,8 +148,8 @@ const SwipeScreen = () => {
 export default SwipeScreen;
 
 const { height, width } = Dimensions.get('window');
-const normalizeHeight = (value: number) => (height / 866) * value;
-const normalizeWidth = (value: number) => (width / 375) * value;
+const normalizeHeight = (value: number) => (height / 844) * value;
+const normalizeWidth = (value: number) => (width / 390) * value;
 
 const styles = StyleSheet.create({
   safeArea: {
@@ -141,7 +157,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#F4F7F5',
   },
   header: {
-
     paddingHorizontal: 20,
     paddingTop: 10,
     paddingBottom: 15,
@@ -157,28 +172,7 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    marginTop: normalizeHeight(100),
     justifyContent: 'center',
     alignItems: 'center',
-    padding: 20,
   },
-  cardPlaceholder: {
-    width: '100%',
-    height: '70%',
-    backgroundColor: colors.surface,
-    borderRadius: 20,
-    justifyContent: 'center',
-    alignItems: 'center',
-    elevation: 5,
-    shadowColor: colors.shadow,
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.1,
-    shadowRadius: 10,
-  },
-  cardText: {
-    fontSize: 18,
-    color: colors.textSecondary,
-    fontWeight: '500',
-    marginVertical: 4,
-  }
 });

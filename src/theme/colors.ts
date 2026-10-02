@@ -35,6 +35,12 @@ export const colors = {
   border: '#D1FAE5',
   borderLight: '#ECFDF5',
   shadow: '#000000',
+
+  // Additional UI Colors (used in Dashboard)
+  screenBackground: '#F4F7F5',   // Main screen background (light gray-green)
+  surfaceSecondary: '#F3F6F4',   // Icon buttons, location pill backgrounds
+  notificationRed: '#EF4444',    // Notification dot indicator
+  onlineGreen: '#10B981',        // Online status badge (same as accent)
 };
 
 export default colors;
