@@ -116,7 +116,8 @@ const topPicks: { id: string; name: string; location: string; age: string; type:
 
 const SwipeScreen = () => {
   const scrollX = useRef(new Animated.Value(0)).current;
-  const cardWidth = normalizeWidth(185);
+  const cardWidth = normalizeWidth(200);   // must match CARD_WIDTH in SwipePetCards
+  const cardMargin = normalizeWidth(16);   // must match CARD_MARGIN in SwipePetCards
   const paddingLeft = (width - cardWidth) / 2;
   const [filter, setFilter] = useState('all');
 
@@ -154,12 +155,12 @@ const SwipeScreen = () => {
             { useNativeDriver: true }
           )}
           scrollEventThrottle={16}
-          snapToInterval={normalizeWidth(185) + normalizeWidth(20)}
+          snapToInterval={cardWidth + cardMargin}
           snapToAlignment="start"
           decelerationRate="fast"
           contentContainerStyle={{
             paddingLeft: paddingLeft,
-            paddingRight: paddingLeft - normalizeWidth(20),
+            paddingRight: paddingLeft - cardMargin,
             alignItems: 'center',
           }}
         />
