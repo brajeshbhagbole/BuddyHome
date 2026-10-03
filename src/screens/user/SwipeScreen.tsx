@@ -126,11 +126,11 @@ const SwipeScreen = () => {
   );
 
   return (
-    <SafeAreaView style={styles.safeArea} edges={['top', 'left', 'right']}>
+    <SafeAreaView style={styles.safeArea} edges={['left', 'right']}>
       <StatusBar backgroundColor="#FFFFFF" barStyle="dark-content" />
       {/* Header */}
       <View style={styles.header}>
-        <Text style={styles.headerTitle}>Top Picks 🐾</Text>
+        <Text style={styles.headerTitle}>Top Picks </Text>
         <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.pills}>
           {FILTERS.map((f) => (
             <TouchableOpacity key={f.id} style={[styles.pill, filter === f.id && styles.pillOn]} onPress={() => setFilter(f.id)} activeOpacity={0.75}>
@@ -182,7 +182,8 @@ const normalizeWidth = (value: number) => (width / 390) * value;
 
 const styles = StyleSheet.create({
   safeArea: { flex: 1, backgroundColor: '#EEF7F3' },
-  header: { backgroundColor: '#FFF', paddingHorizontal: 20, paddingTop: 10, paddingBottom: 14, borderBottomLeftRadius: 20, borderBottomRightRadius: 20, elevation: 4, shadowColor: '#000', shadowOffset: { width: 0, height: 2 }, shadowOpacity: 0.06, shadowRadius: 8 },
+  statusBarBg: { backgroundColor: '#FFFFFF', paddingTop: StatusBar.currentHeight ?? 0 },
+  header: { backgroundColor: '#FFF', paddingHorizontal: 20, paddingTop: (StatusBar.currentHeight ?? 0) + 10, paddingBottom: 14, borderBottomLeftRadius: 20, borderBottomRightRadius: 20, elevation: 4, shadowColor: '#000', shadowOffset: { width: 0, height: 2 }, shadowOpacity: 0.06, shadowRadius: 8 },
   headerTitle: { fontSize: 22, fontWeight: '800', color: colors.textPrimary, marginBottom: 12 },
   pills: { flexDirection: 'row', gap: 8 },
   pill: { paddingHorizontal: 16, paddingVertical: 7, borderRadius: 20, backgroundColor: '#F3F6F4', borderWidth: 1.2, borderColor: '#E2EAE6' },
