@@ -1,10 +1,17 @@
-import React from 'react';
-import { View, Text, StyleSheet, FlatList, Dimensions, Animated, ScrollView, TouchableOpacity } from 'react-native';
+import React, { useRef, useState } from 'react';
+import { View, Text, StyleSheet, Dimensions, Animated, ScrollView, TouchableOpacity, StatusBar } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import colors from '../../theme/colors';
 import SwipePetCards from '../../components/SwipeScreen/SwipePetCards';
-import { useRef } from 'react';
-const topPicks = [
+
+const FILTERS = [
+  { id: 'all', label: 'All' },
+  { id: 'adopt', label: 'Adopt' },
+  { id: 'sell', label: 'Buy' },
+  { id: 'dog', label: 'Dogs' },
+  { id: 'cat', label: 'Cats' },
+];
+const topPicks: { id: string; name: string; location: string; age: string; type: 'adopt' | 'sell'; price: string | null; image: string }[] = [
   {
     id: '13',
     name: 'Tuffy',
@@ -111,13 +118,25 @@ const SwipeScreen = () => {
   const scrollX = useRef(new Animated.Value(0)).current;
   const cardWidth = normalizeWidth(185);
   const paddingLeft = (width - cardWidth) / 2;
-  const [activeCategory, setActiveCategory] = React.useState(0);
+  const [filter, setFilter] = useState('all');
+
+  const pets = topPicks.filter((p: any) =>
+    filter === 'all' ? true : filter === 'dog' ? p.petType === 'dog' : filter === 'cat' ? p.petType === 'cat' : p.type === filter
+  );
 
   return (
     <SafeAreaView style={styles.safeArea} edges={['top', 'left', 'right']}>
+      <StatusBar backgroundColor="#FFFFFF" barStyle="dark-content" />
       {/* Header */}
       <View style={styles.header}>
-        <Text style={styles.headerTitle}>Top Pick's</Text>
+        <Text style={styles.headerTitle}>Top Picks 🐾</Text>
+        <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.pills}>
+          {FILTERS.map((f) => (
+            <TouchableOpacity key={f.id} style={[styles.pill, filter === f.id && styles.pillOn]} onPress={() => setFilter(f.id)} activeOpacity={0.75}>
+              <Text style={[styles.pillTxt, filter === f.id && styles.pillTxtOn]}>{f.label}</Text>
+            </TouchableOpacity>
+          ))}
+        </ScrollView>
       </View>
 
       {/* Cards Area */}
@@ -161,24 +180,14 @@ const normalizeHeight = (value: number) => (height / 844) * value;
 const normalizeWidth = (value: number) => (width / 390) * value;
 
 const styles = StyleSheet.create({
-  safeArea: {
-    flex: 1,
-    backgroundColor: '#EEF7F3',
-  },
-  header: {
-    paddingHorizontal: 20,
-    paddingTop: 10,
-    paddingBottom: 15,
-    backgroundColor: colors.surface,
-    borderBottomWidth: 1,
-    borderBottomColor: colors.borderLight,
-    alignItems: 'center',
-  },
-  headerTitle: {
-    fontSize: 20,
-    fontWeight: '800',
-    color: colors.textPrimary,
-  },
+  safeArea: { flex: 1, backgroundColor: '#EEF7F3' },
+  header: { backgroundColor: '#FFF', paddingHorizontal: 20, paddingTop: 10, paddingBottom: 14, borderBottomLeftRadius: 20, borderBottomRightRadius: 20, elevation: 4, shadowColor: '#000', shadowOffset: { width: 0, height: 2 }, shadowOpacity: 0.06, shadowRadius: 8 },
+  headerTitle: { fontSize: 22, fontWeight: '800', color: colors.textPrimary, marginBottom: 12 },
+  pills: { flexDirection: 'row', gap: 8 },
+  pill: { paddingHorizontal: 16, paddingVertical: 7, borderRadius: 20, backgroundColor: '#F3F6F4', borderWidth: 1.2, borderColor: '#E2EAE6' },
+  pillOn: { backgroundColor: colors.primary, borderColor: colors.primary },
+  pillTxt: { fontSize: 12, fontWeight: '600', color: colors.textSecondary },
+  pillTxtOn: { color: '#FFF' },
   container: {
     flex: 1,
     justifyContent: 'center',
