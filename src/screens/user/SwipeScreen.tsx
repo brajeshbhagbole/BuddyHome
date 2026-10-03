@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet, FlatList, Dimensions, Animated } from 'react-native';
+import { View, Text, StyleSheet, FlatList, Dimensions, Animated, ScrollView, TouchableOpacity } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import colors from '../../theme/colors';
 import SwipePetCards from '../../components/SwipeScreen/SwipePetCards';
@@ -111,12 +111,16 @@ const SwipeScreen = () => {
   const scrollX = useRef(new Animated.Value(0)).current;
   const cardWidth = normalizeWidth(185);
   const paddingLeft = (width - cardWidth) / 2;
+  const [activeCategory, setActiveCategory] = React.useState(0);
 
   return (
     <SafeAreaView style={styles.safeArea} edges={['top', 'left', 'right']}>
+      {/* Header */}
       <View style={styles.header}>
         <Text style={styles.headerTitle}>Top Pick's</Text>
       </View>
+
+      {/* Cards Area */}
       <View style={styles.container}>
         <Animated.FlatList
           showsHorizontalScrollIndicator={false}
@@ -141,6 +145,11 @@ const SwipeScreen = () => {
           }}
         />
       </View>
+
+      {/* Swipe Hint */}
+      <View style={styles.hintBar}>
+        <Text style={styles.hintText}>← Swipe cards to explore more pets →</Text>
+      </View>
     </SafeAreaView>
   );
 };
@@ -154,7 +163,7 @@ const normalizeWidth = (value: number) => (width / 390) * value;
 const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
-    backgroundColor: '#F4F7F5',
+    backgroundColor: '#EEF7F3',
   },
   header: {
     paddingHorizontal: 20,
@@ -167,12 +176,22 @@ const styles = StyleSheet.create({
   },
   headerTitle: {
     fontSize: 20,
-    fontWeight: 'bold',
+    fontWeight: '800',
     color: colors.textPrimary,
   },
   container: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  hintBar: {
+    paddingVertical: 12,
+    alignItems: 'center',
+  },
+  hintText: {
+    fontSize: 12,
+    color: colors.textSecondary,
+    fontWeight: '500',
+    opacity: 0.7,
   },
 });
